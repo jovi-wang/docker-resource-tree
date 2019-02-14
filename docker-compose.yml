@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  node-server:
+    build: ./node-server
+    volumes:
+      - ./node-server:/app
+    restart: always
+    tty: true
+    command: sh -c /entrypoint.sh
+    ports:
+      - 8080:8080
+
+
+  webapp:
+    build: ./webapp
+    command: sh -c /entrypoint.sh
+    tty: true
+    volumes:
+      - ./webapp:/app
+    ports:
+      - 3000:3000
