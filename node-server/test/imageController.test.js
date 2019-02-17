@@ -13,6 +13,9 @@ describe('GET /images', () => {
     // dockerAPI.get.mockImplementation(() => Promise.resolve(resp));
 
     const response = await request(app).get('/images/');
+    expect(dockerAPI.get).toBeCalled();
+    expect(dockerAPI.get).toBeCalledWith('/images/json');
+
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockImages);
   });
