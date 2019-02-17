@@ -4,11 +4,10 @@ exports.getAllImages = async (req, res) => {
   try {
     const { data } = await dockerAPI.get('/images/json');
     console.log(data);
-    res.send('Get all images');
+    res.json(data);
   } catch (err) {
     console.log(err);
   }
-
 };
 
 exports.getSingleImage = (req, res) => {
