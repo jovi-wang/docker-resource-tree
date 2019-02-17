@@ -11,7 +11,7 @@ services:
     command: sh -c /entrypoint.sh
     ports:
       - 8080:8080
-    user: 1000:1000
+    # user: 1000:1000
     # $(id -u):$(id -g) 
 
   webapp:
@@ -22,4 +22,4 @@ services:
       - ./webapp:/app
     ports:
       - 3000:3000
-    user: 1000:1000
+    # user: 1000:1000
