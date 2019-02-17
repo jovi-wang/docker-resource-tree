@@ -6,5 +6,7 @@ const client = axios.create({
 });
 
 module.exports = {
-  get: client.get
+  get(url) {
+    return client.get(url);
+  }
 };
