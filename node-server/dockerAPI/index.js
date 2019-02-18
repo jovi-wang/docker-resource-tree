@@ -8,5 +8,8 @@ const client = axios.create({
 module.exports = {
   get(url) {
     return client.get(url);
+  },
+  post(url) {
+    return client.post(url);
   }
 };
