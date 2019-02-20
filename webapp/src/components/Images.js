@@ -1,9 +1,8 @@
 import React from 'react';
 // https://semantic-ui.com/elements/list.html
-const App = () => {
+const Images = () => {
   return (
     <div className='ui container'>
-      <div className='ui divider' />
       <div className='ui list'>
         <div className='item'>
           <i className='folder icon' />
@@ -15,7 +14,7 @@ const App = () => {
                 <i className='folder icon' />
                 <div className='content'>
                   <div className='header'>site</div>
-                  <div className='description'>Your site's theme</div>
+                  <div className='description'>Your sites theme</div>
                 </div>
               </div>
               <div className='item'>
@@ -111,4 +110,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Images;
