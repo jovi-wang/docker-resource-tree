@@ -1,6 +1,6 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import history from '../history';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import HomePage from './HomePage';
 import ImagesPage from './ImagesPage';
@@ -10,10 +10,10 @@ import NetworksPage from './NetworksPage';
 // import Modal from './Modal';
 
 // https://semantic-ui.com/elements/list.html
-const App = () => {
+const App = ({ history }) => {
   return (
     <div className='ui container'>
-      <Router history={history}>
+      <ConnectedRouter history={history}>
         <div>
           <Header />
           <Switch>
@@ -29,7 +29,7 @@ const App = () => {
             <Route path='/streams/:id' exact component={StreamShow} /> */}
           </Switch>
         </div>
-      </Router>
+      </ConnectedRouter>
     </div>
   );
 };

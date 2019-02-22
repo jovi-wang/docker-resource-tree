@@ -4,7 +4,7 @@ const { listVolumes, inspectVolume, pruneVolumes } = require('../controllers/vol
 const router = express.Router();
 
 router.get('/', listVolumes);
-router.get('/:VolumeId', inspectVolume);
+router.get('/:volumeId', inspectVolume);
 router.post('/prune', pruneVolumes);
 
 module.exports = router;

@@ -1,7 +1,11 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { Router, Route, Switch, MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter, push, routerMiddleware } from 'connected-react-router';
+import { createMemoryHistory } from 'history';
+import configureMockStore from 'redux-mock-store';
 
 import Header from '../../components/Header';
 import App from '../../components/App';
@@ -12,12 +16,12 @@ import VolumesPage from '../../components/VolumesPage';
 import NetworksPage from '../../components/NetworksPage';
 
 Enzyme.configure({ adapter: new Adapter() });
-const shallowWrapper = shallow(<App />);
 
 describe('App components render all routes', () => {
+  const shallowWrapper = shallow(<App />);
   it('should render router', () => {
     expect(shallowWrapper.length).toEqual(1);
-    expect(shallowWrapper.find(Router).length).toEqual(1);
+    expect(shallowWrapper.find(ConnectedRouter).length).toEqual(1);
     expect(shallowWrapper.find(Header).length).toEqual(1);
     expect(shallowWrapper.find(Switch).length).toEqual(1);
     expect(shallowWrapper.find(Route).length).toEqual(6);
@@ -34,16 +38,44 @@ describe('App components render all routes', () => {
   });
 });
 
-describe('route to specific page', () => {
-  it('should route to /', () => {
-    const mountWrapper = mount(
-      <MemoryRouter initialEntries={['/networks']}>
-        <App />
-      </MemoryRouter>
-    );
-    console.log(mountWrapper.find(VolumesPage).length);
-    console.log(mountWrapper.find(HomePage).length);
-    console.log(mountWrapper.find(ImagesPage).length);
-    mountWrapper.unmount();
-  });
-});
+// describe('route to specific page', () => {
+//   let props;
+//   let store;
+//   let history;
+//   // Reset history
+//   history = createMemoryHistory();
+
+//   // Mock props
+//   props = {
+//     action: 'PUSH',
+//     location: {
+//       pathname: '/path/to/somewhere'
+//     },
+//     history
+//   };
+
+//   // Mock store
+//   const middlewares = [routerMiddleware];
+//   const mockStore = configureMockStore([routerMiddleware]);
+//   store = mockStore({
+//     router: {
+//       // action: 'PUSH',
+//       // location: props.history.location
+//       action: '',
+//       location: {}
+//     }
+//   });
+//   it('should route to /', () => {
+//     const mountWrapper = mount(
+//       <Provider store={store}>
+//         <App history={history} />
+//       </Provider>
+//     );
+//     store.dispatch({
+//       type: "@@router/LOCATION_CHANGE",
+//       payload: props
+//     });
+//     mountWrapper.update();
+//     console.log(store.getActions());
+//   });
+// });

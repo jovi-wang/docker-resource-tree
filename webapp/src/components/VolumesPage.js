@@ -13,7 +13,10 @@ export class Volumes extends Component {
         <div className='item'>Apples</div>
         <div className='item'>Pears</div>
         <div className='item'>Oranges</div>
-        <button className='ui button' onClick={this.props.saveComment}>
+        <button className='ui button' onClick={() => {
+          this.props.saveComment();
+          this.props.fetchStreams();
+        }}>
           Clean unused volumes
         </button>
       </div>
