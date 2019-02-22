@@ -2,12 +2,12 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from '../history';
 import Header from './Header';
-import Home from './Home';
-import Images from './Images';
-import Containers from './Containers';
-import Volumes from './Volumes';
-import Networks from './Networks';
-import Modal from './Modal';
+import HomePage from './HomePage';
+import ImagesPage from './ImagesPage';
+import ContainersPage from './ContainersPage';
+import VolumesPage from './VolumesPage';
+import NetworksPage from './NetworksPage';
+// import Modal from './Modal';
 
 // https://semantic-ui.com/elements/list.html
 const App = () => {
@@ -17,11 +17,12 @@ const App = () => {
         <div>
           <Header />
           <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/images/' exact component={Images} />
-            <Route path='/volumes/' exact component={Volumes} />
-            <Route path='/containers/' exact component={Containers} />
-            <Route path='/networks/' exact component={Modal} />
+            <Route path='/' exact component={HomePage} />
+            <Route path='/images/' exact component={ImagesPage} />
+            <Route path='/volumes/' exact component={VolumesPage} />
+            <Route path='/containers/' exact component={ContainersPage} />
+            <Route path='/networks/' exact component={NetworksPage} />
+            <Route component={HomePage} />
             {/* <Route path='/images/new' exact component={StreamCreate} />
             <Route path='/streams/edit/:id' exact component={StreamEdit} />
             <Route path='/streams/delete/:id' exact component={StreamDelete} />

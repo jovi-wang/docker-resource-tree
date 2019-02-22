@@ -15,7 +15,7 @@ afterAll(() => {
 });
 
 describe('GET /images', () => {
-  test('should get all images', async () => {
+  it('should get all images', async () => {
     const mockImageId = 'sha256:123abc';
     const mockImages = [{ Id: mockImageId }];
     dockerAPI.get.mockResolvedValue({ data: mockImages });
@@ -32,7 +32,7 @@ describe('GET /images', () => {
 });
 
 describe('GET /images/:imageId', () => {
-  test('should get single image info', async () => {
+  it('should get single image info', async () => {
     const mockImageId = 'sha256:123abc';
     const mockImageData = { Id: mockImageId };
     dockerAPI.get.mockResolvedValue({ data: mockImageData });
@@ -47,7 +47,7 @@ describe('GET /images/:imageId', () => {
 });
 
 describe('GET /images/:imageId/history', () => {
-  test('should get single image info build history', async () => {
+  it('should get single image info build history', async () => {
     const mockImageId = 'sha256:123abc';
     const mockImageData = { Id: mockImageId };
     dockerAPI.get.mockResolvedValue({ data: mockImageData });
@@ -62,7 +62,7 @@ describe('GET /images/:imageId/history', () => {
 });
 
 describe('POST /images/:imageId/tag', () => {
-  test('should tag a image with repo and tag', async () => {
+  it('should tag a image with repo and tag', async () => {
     dockerAPI.post.mockResolvedValue({ data: {} });
 
     const response = await request(app)
@@ -77,7 +77,7 @@ describe('POST /images/:imageId/tag', () => {
 });
 
 describe('POST /images/prune', () => {
-  test('should remove unused images', async () => {
+  it('should remove unused images', async () => {
     dockerAPI.post.mockResolvedValue({ data: {} });
 
     const response = await request(app).post('/images/prune');
