@@ -1,10 +1,8 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 
 import HomePage from '../../components/HomePage';
 
-Enzyme.configure({ adapter: new Adapter() });
 const enzymeWrapper = shallow(<HomePage />);
 
 describe('HomePage components', () => {

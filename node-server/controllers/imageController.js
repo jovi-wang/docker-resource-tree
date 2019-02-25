@@ -3,7 +3,6 @@ const dockerAPI = require('../dockerAPI');
 exports.listImages = async (req, res) => {
   try {
     const { data } = await dockerAPI.get('/images/json?all=true');
-    console.log(data.length);
     res.json(data);
   } catch (err) {
     console.log(err);

@@ -1,6 +1,5 @@
 import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter, push, routerMiddleware } from 'connected-react-router';
@@ -15,7 +14,6 @@ import ContainersPage from '../../components/ContainersPage';
 import VolumesPage from '../../components/VolumesPage';
 import NetworksPage from '../../components/NetworksPage';
 
-Enzyme.configure({ adapter: new Adapter() });
 
 describe('App components render all routes', () => {
   const shallowWrapper = shallow(<App />);

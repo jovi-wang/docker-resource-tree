@@ -3,7 +3,6 @@ const dockerAPI = require('../dockerAPI');
 exports.listNetworks = async (req, res) => {
   try {
     const { data } = await dockerAPI.get('/networks');
-    console.log(data.length);
     res.json(data);
   } catch (err) {
     console.log(err);
