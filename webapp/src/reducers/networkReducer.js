@@ -1,11 +1,24 @@
-import { INSPECT_NETWORK, FETCH_NETWORKS } from '../constant';
+// import _ from 'lodash';
 
-export default (state = [], action) => {
+import { NETWORK } from '../constant';
+
+const INITIAL_STATE = {
+  networkArray: [],
+  inspected: {}
+};
+
+export default (state = INITIAL_STATE, action) => {
+  const { FETCH, INSPECT, PRUNE } = NETWORK;
   switch (action.type) {
-    // case INSPECT_NETWORK:
-    //   return [...state];
-    case FETCH_NETWORKS:
-      return [...state, action.payload];
+    case INSPECT:
+      return { ...state, inspected: action.payload };
+    case PRUNE:
+      return {
+        ...state,
+        networkArray: state.networkArray.filter((i) => !action.payload.includes(i.Name))
+      };
+    case FETCH:
+      return { ...state, networkArray: [...action.payload] };
     default:
       return state;
   }

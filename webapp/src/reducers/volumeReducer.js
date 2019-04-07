@@ -1,12 +1,23 @@
-import { INSPECT_VOLUME, FETCH_VOLUMES } from '../constant';
+import { VOLUME } from '../constant';
 
-export default (state = [], action) => {
+const INITIAL_STATE = {
+  volumeArray: [],
+  inspected: {}
+};
+
+export default (state = INITIAL_STATE, action) => {
+  const { FETCH, INSPECT, PRUNE } = VOLUME;
   switch (action.type) {
-    case INSPECT_VOLUME:
+    case INSPECT:
       console.log(action.payload);
-      return [...state];
-    case FETCH_VOLUMES:
-      return [...state, action.payload];
+      return { ...state, inspected: action.payload };
+    case PRUNE:
+      return {
+        ...state,
+        volumeArray: state.volumeArray.filter((i) => !action.payload.includes(i.Name))
+      };
+    case FETCH:
+      return { ...state, volumeArray: [...action.payload] };
     default:
       return state;
   }

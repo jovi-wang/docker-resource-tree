@@ -6,6 +6,7 @@ export class Networks extends Component {
   componentDidMount() {
     this.props.fetchNetworks();
   }
+
   render() {
     return (
       <div className='ui list'>
@@ -16,15 +17,14 @@ export class Networks extends Component {
         <button
           className='ui button'
           onClick={() =>
-            this.props.pruneVolumes()
+            this.props.pruneNetworks()
           }
         >
           Clean unused networks
-      </button>
+        </button>
       </div>
     );
   }
-
 }
 
 export default connect(
