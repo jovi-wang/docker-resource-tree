@@ -21,8 +21,8 @@ exports.inspectVolume = async (req, res) => {
 };
 exports.pruneVolumes = async (req, res) => {
   try {
-    await dockerAPI.post('/volumes/prune');
-    res.json();
+    const { data } = await dockerAPI.post('/volumes/prune');
+    res.json(data);
   } catch (err) {
     console.log(err);
     res.status(400).send(err.response.data);

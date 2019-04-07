@@ -1,30 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import { fetchVolumes, pruneVolumes } from '../actions';
 
 export class Volumes extends Component {
   state = { comment: '' };
 
+  componentDidMount() {
+    this.props.fetchVolumes();
+  }
+
   render() {
-    console.log(this.state.comment);
+    console.log('line 13', this.state.comment);
     return (
       <div className='ui list'>
-        <h1>sdsd</h1>
+        <h1>Volume List</h1>
         <div className='item'>Apples</div>
         <div className='item'>Pears</div>
         <div className='item'>Oranges</div>
-        <button className='ui button' onClick={() => {
-          this.props.saveComment();
-          this.props.fetchStreams();
-        }}>
+        <button
+          className='ui button'
+          onClick={() =>
+            this.props.pruneVolumes()
+          }
+        >
           Clean unused volumes
         </button>
-      </div>
+      </div >
     );
   }
 }
 
 export default connect(
   null,
-  actions
+  { fetchVolumes, pruneVolumes }
 )(Volumes);

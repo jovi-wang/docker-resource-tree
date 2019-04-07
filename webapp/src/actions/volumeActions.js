@@ -1,14 +1,13 @@
-import { ABC, FETCH } from '../constant';
+import { FETCH_ALL_VOLUMES, FETCH_SINGLE_VOLUME } from '../constant';
 import dockerAPI from '../dockerAPI';
 
-export const fetchStreams = () => async (dispatch) => {
-  const response = await dockerAPI.get('/todos/1');
-  console.log(response.data);
-  dispatch({ type: FETCH, payload: response.data });
+export const fetchVolumes = () => async (dispatch) => {
+  const response = await dockerAPI.get('/volumes');
+  dispatch({ type: FETCH_ALL_VOLUMES, payload: response.data.Volumes });
 };
-export const saveComment = () => {
-  return {
-    type: ABC,
-    payload: 'abc'
-  };
+
+export const fetchVolume = (volumeName) => async (dispatch) => {
+  const response = await dockerAPI.get(`/volumes/${volumeName}`);
+  console.log(response.data);
+  dispatch({ type: FETCH_SINGLE_VOLUME, payload: response.data });
 };
