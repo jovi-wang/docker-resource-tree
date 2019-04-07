@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchNetworks } from '../actions';
-export class Networks extends Component {
+import * as actions from '../actions';
 
+export class Networks extends Component {
   componentDidMount() {
     this.props.fetchNetworks();
   }
   render() {
     return (
       <div className='ui list'>
+        <h1>Network List</h1>
         <div className='item'>Apples</div>
         <div className='item'>Pears</div>
         <div className='item'>Oranges</div>
+        <button
+          className='ui button'
+          onClick={() =>
+            this.props.pruneVolumes()
+          }
+        >
+          Clean unused networks
+      </button>
       </div>
     );
   }
@@ -20,5 +29,5 @@ export class Networks extends Component {
 
 export default connect(
   null,
-  { fetchNetworks }
+  actions
 )(Networks);

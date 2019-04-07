@@ -21,8 +21,8 @@ exports.inspectNetwork = async (req, res) => {
 };
 exports.pruneNetWorks = async (req, res) => {
   try {
-    await dockerAPI.post('/networks/prune');
-    res.json();
+    const { data } = await dockerAPI.post('/networks/prune');
+    res.json(data);
   } catch (err) {
     console.log(err);
     res.status(400).send(err.response.data);

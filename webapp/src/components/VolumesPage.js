@@ -10,7 +10,6 @@ export class Volumes extends Component {
   }
 
   render() {
-    console.log('line 13', this.state.comment);
     return (
       <div className='ui list'>
         <h1>Volume List</h1>
@@ -25,7 +24,7 @@ export class Volumes extends Component {
         >
           Clean unused volumes
         </button>
-      </div >
+      </div>
     );
   }
 }

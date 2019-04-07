@@ -21,8 +21,8 @@ exports.inspectContainer = async (req, res) => {
 };
 exports.pruneContainers = async (req, res) => {
   try {
-    await dockerAPI.post('/containers/prune');
-    res.json();
+    const { data } = await dockerAPI.post('/containers/prune');
+    res.json(data);
   } catch (err) {
     console.log(err);
     res.status(400).send(err.response.data);
