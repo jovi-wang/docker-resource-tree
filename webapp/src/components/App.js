@@ -7,7 +7,7 @@ import ImagesPage from './ImagesPage';
 import ContainersPage from './ContainersPage';
 import VolumesPage from './VolumesPage';
 import NetworksPage from './NetworksPage';
-import Detail from './Detail';
+import DetailPage from './DetailPage';
 
 // https://semantic-ui.com/elements/list.html
 const App = ({ history }) => {
@@ -22,7 +22,7 @@ const App = ({ history }) => {
             <Route path='/volumes/' exact component={VolumesPage} />
             <Route path='/containers/' exact component={ContainersPage} />
             <Route path='/networks/' exact component={NetworksPage} />
-            <Route path='/detail/:type/:uuid' exact component={Detail} />
+            <Route path='/detail/:type/:uuid' exact component={DetailPage} />
             <Route component={HomePage} />
             {/* <Route path='/images/new' exact component={StreamCreate} />
             <Route path='/streams/edit/:id' exact component={StreamEdit} />
