@@ -3,9 +3,13 @@ import { push } from 'connected-react-router';
 import { VOLUME, NETWORK, CONTAINER } from '../constant';
 import dockerAPI from '../dockerAPI';
 
+export const navigate = (path) => {
+  return push(path);
+};
+
 export const fetchVolumes = () => async (dispatch) => {
   const { data } = await dockerAPI.get('/volumes');
-  dispatch({ type: VOLUME.FETCH, payload: data.Volumes });
+  dispatch({ type: VOLUME.FETCH, payload: data.Volumes.map((i) => ({ ...i, Id: i.Name })) });
 };
 
 export const inspectVolume = (volumeName) => async (dispatch) => {
@@ -17,7 +21,7 @@ export const inspectVolume = (volumeName) => async (dispatch) => {
 export const pruneVolumes = () => async (dispatch) => {
   const { data } = await dockerAPI.post(`/volumes/prune`);
   dispatch({ type: VOLUME.PRUNE, payload: data.VolumesDeleted });
-  dispatch(push('/'));
+  dispatch(navigate('/'));
 };
 
 export const fetchNetworks = () => async (dispatch) => {

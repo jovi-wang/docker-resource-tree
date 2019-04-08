@@ -3,7 +3,7 @@
 import { NETWORK } from '../constant';
 
 const INITIAL_STATE = {
-  networkArray: [],
+  list: [],
   inspected: {}
 };
 
@@ -15,10 +15,10 @@ export default (state = INITIAL_STATE, action) => {
     case PRUNE:
       return {
         ...state,
-        networkArray: state.networkArray.filter((i) => !action.payload.includes(i.Name))
+        list: state.list.filter((i) => !action.payload.includes(i.Name))
       };
     case FETCH:
-      return { ...state, networkArray: [...action.payload] };
+      return { ...state, list: [...action.payload] };
     default:
       return state;
   }

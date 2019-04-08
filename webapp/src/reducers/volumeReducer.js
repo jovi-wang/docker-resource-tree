@@ -1,7 +1,7 @@
 import { VOLUME } from '../constant';
 
 const INITIAL_STATE = {
-  volumeArray: [],
+  list: [],
   inspected: {}
 };
 
@@ -14,10 +14,10 @@ export default (state = INITIAL_STATE, action) => {
     case PRUNE:
       return {
         ...state,
-        volumeArray: state.volumeArray.filter((i) => !action.payload.includes(i.Name))
+        list: state.list.filter((i) => !action.payload.includes(i.Name))
       };
     case FETCH:
-      return { ...state, volumeArray: [...action.payload] };
+      return { ...state, list: [...action.payload] };
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import { CONTAINER } from '../constant';
 
 const INITIAL_STATE = {
-  containerArray: [],
+  list: [],
   inspected: {}
 };
 export default (state = INITIAL_STATE, action) => {
@@ -13,10 +13,10 @@ export default (state = INITIAL_STATE, action) => {
       console.log(action.payload);
       return {
         ...state,
-        containerArray: state.containerArray.filter((i) => !action.payload.includes(i.Id))
+        list: state.list.filter((i) => !action.payload.includes(i.Id))
       };
     case FETCH:
-      return { ...state, containerArray: action.payload };
+      return { ...state, list: action.payload };
     default:
       return state;
   }
