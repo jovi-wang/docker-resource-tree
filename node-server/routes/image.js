@@ -4,7 +4,8 @@ const {
   inspectImage,
   pruneImages,
   getImageHistory,
-  tagImage
+  tagImage,
+  deleteImage
 } = require('../controllers/imageController');
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.get('/:imageId', inspectImage);
 router.get('/:imageId/history', getImageHistory);
 router.post('/:imageId/tag', tagImage);
 router.post('/prune', pruneImages);
+router.delete('/:imageId', deleteImage);
 
 module.exports = router;

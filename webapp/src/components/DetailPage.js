@@ -31,13 +31,32 @@ class Detail extends Component {
 
   componentDidUpdate() {
     const { resourceType, error } = this.props;
-    if (error) {
+    if (error && resourceType !== 'image') {
       this.props.navigate(`/${resourceType}s`);
     }
   }
 
+  // specific for delete image
+  renderActions() {
+    const { resource, resourceType } = this.props;
+    if (resourceType === 'image') {
+      return (
+        <button
+          onClick={() => this.props.deleteImage(resource.Id)}
+          className="ui button negative"
+        >
+          Delete
+        </button>
+      );
+    }
+    return null;
+  }
+
   renderContent() {
-    const { resource } = this.props;
+    const { resource, error, resourceType } = this.props;
+    if (resourceType === 'image' && error) {
+      return 'Fail to delete this image';
+    }
     return (
       <ReactJson
         src={resource}
@@ -55,7 +74,7 @@ class Detail extends Component {
       <Modal
         title={`${resourceType} detail`}
         content={this.renderContent()}
-        // actions={this.renderActions()}
+        actions={this.renderActions()}
         onDismiss={() => this.props.navigate(`/${resourceType}s`)}
       />
     );

@@ -17,13 +17,14 @@ export class Images extends Component {
         <div className='item'>
           <i className='docker icon' />
           <div className='content'>
-            {/* eslint-disable-next-line */}
+            {/* eslint-disable */}
             <a
               className='header'
               onClick={() => this.props.navigate(`/detail/image/${element.Id}`)}
             >
               {element.RepoTags[0]}
             </a>
+            {/* eslint-enable */}
             {this.renderChildren(element)}
           </div>
         </div>
@@ -41,11 +42,12 @@ export class Images extends Component {
           <div className='item'>
             <i className='docker icon' />
             <div className='content'>
-              {/* eslint-disable-next-line */}
+              {/* eslint-disable */}
               <a
                 className='header'
                 onClick={() => this.props.navigate(`/detail/image/${parentImage.Id}`)}
               >
+                {/* eslint-enable */}
                 {parentImage.RepoTags[0]}
               </a>
               {this.renderChildren(parentImage)}

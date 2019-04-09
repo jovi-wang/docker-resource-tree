@@ -49,11 +49,23 @@ exports.pruneImages = async (req, res) => {
   try {
     const response1 = await dockerAPI.post('/build/prune?all=true');
     console.log(response1.data);
-    const response2 = await dockerAPI.post('/images/prune');
-    console.log(response2.data);
-    res.json();
+    const { data } = await dockerAPI.post('/images/prune');
+    console.log(data);
+    res.json(data);
   } catch (err) {
     console.log(err);
     res.status(400).send(err.response.data);
+  }
+};
+
+exports.deleteImage = async (req, res) => {
+  try {
+    const { imageId } = req.params;
+    const { data } = await dockerAPI.delete(`/images/${imageId}`);
+    console.log(data);
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err.response.data);
   }
 };

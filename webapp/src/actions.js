@@ -94,7 +94,16 @@ export const inspectImage = (networkId) => async (dispatch) => {
 
 export const pruneImages = () => async (dispatch) => {
   const { data } = await dockerAPI.post(`/images/prune`);
-  dispatch({ type: IMAGE.PRUNE, payload: data.ContainersDeleted || [] });
+  dispatch({ type: IMAGE.PRUNE, payload: data.ImagesDeleted || [] });
 };
 
-export const tagMidLayerImages = () => {};
+export const deleteImage = (imageId) => async (dispatch) => {
+  try {
+    const { data } = await dockerAPI.delete(`/images/${imageId}`);
+    dispatch({ type: IMAGE.DELETE, payload: data });
+    dispatch(navigate('/images'));
+  } catch (err) {
+    console.log(err)
+    dispatch({ type: COMMON.ERROR, payload: err.message });
+  }
+};
