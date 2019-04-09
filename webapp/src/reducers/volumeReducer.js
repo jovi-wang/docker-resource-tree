@@ -9,7 +9,6 @@ export default (state = INITIAL_STATE, action) => {
   const { FETCH, INSPECT, PRUNE } = VOLUME;
   switch (action.type) {
     case INSPECT:
-      console.log(action.payload);
       return { ...state, inspected: action.payload };
     case PRUNE:
       return {

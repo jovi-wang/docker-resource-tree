@@ -7,6 +7,7 @@ export class Images extends Component {
   componentDidMount() {
     this.props.fetchImages();
   }
+
   render() {
     return (
       <div className='ui container'>
@@ -30,7 +31,7 @@ export class Images extends Component {
                     <div className='header'>
                       <a className='header' onClick={() => console.log(1)}>
                         themes
-                    </a>
+                      </a>
                     </div>
                     <div className='description'>Packaged theme files</div>
                     <i className='low vision icon' />
@@ -49,7 +50,7 @@ export class Images extends Component {
                           <div className='header'>my_theme</div>
                           <div className='description'>
                             Packaged themes are also available in this folder
-                          <div className='list'>
+                            <div className='list'>
                               <div className='item'>
                                 <i className='folder icon' />
                                 <div className='content'>
@@ -64,7 +65,7 @@ export class Images extends Component {
                                   <div className='header'>my_theme</div>
                                   <div className='description'>
                                     Packaged themes are also available in this folder
-                                </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -114,9 +115,9 @@ export class Images extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
-};
+}
 export default connect(
   null,
   actions

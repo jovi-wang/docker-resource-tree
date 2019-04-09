@@ -10,7 +10,6 @@ export default (state = INITIAL_STATE, action) => {
     case INSPECT:
       return { ...state, inspected: action.payload };
     case PRUNE:
-      console.log(action.payload);
       return {
         ...state,
         list: state.list.filter((i) => !action.payload.includes(i.Id))

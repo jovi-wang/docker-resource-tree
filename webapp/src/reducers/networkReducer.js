@@ -1,5 +1,3 @@
-// import _ from 'lodash';
-
 import { NETWORK } from '../constant';
 
 const INITIAL_STATE = {

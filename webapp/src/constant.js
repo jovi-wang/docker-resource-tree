@@ -1,3 +1,8 @@
+export const COMMON = {
+  ERROR: 'ERROR',
+  CLEAR_ERROR: 'CLEAR_ERROR'
+};
+
 export const VOLUME = {
   INSPECT: 'INSPECT_VOLUME',
   FETCH: 'FETCH_VOLUMES',

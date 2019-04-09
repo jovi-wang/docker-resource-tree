@@ -1,36 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactJson from 'react-json-view';
+
 import Modal from './Modal';
 import * as actions from '../actions';
 
 class Detail extends Component {
   componentDidMount() {
-    const { resource, resourceType } = this.props;
+    const { resourceType, uuid } = this.props;
     if (!resourceType) {
       this.props.navigate(`/`);
-    } else if (!resource) {
+    } else {
+      switch (resourceType) {
+        case 'network':
+          this.props.inspectNetwork(uuid);
+          break;
+        case 'volume':
+          this.props.inspectVolume(uuid);
+          break;
+        case 'container':
+          this.props.inspectContainer(uuid);
+          break;
+        case 'image':
+          this.props.inspectImage(uuid);
+          break;
+        default:
+      }
+    }
+  }
+
+  componentDidUpdate() {
+    const { resourceType, error } = this.props;
+    if (error) {
       this.props.navigate(`/${resourceType}s`);
     }
   }
 
-  renderActions() {
-    return (
-      <React.Fragment>
-        <button onClick={() => console.log('123')} className='ui button negative'>
-          Delete
-        </button>
-        {/* <Link to='/' className='ui button'>
-          Cancel
-        </Link> */}
-      </React.Fragment>
-    );
-  }
-
   renderContent() {
-    if (!this.props.stream) {
-      return 'Are you sure you want to delete this stream?';
-    }
-    return `Are you sure you want to delete the stream with title: ${this.props.stream.title}`;
+    const { resource } = this.props;
+    return (
+      <ReactJson
+        src={resource}
+        enableClipboard={false}
+        name={false}
+        displayDataTypes={false}
+        collapsed
+      />
+    );
   }
 
   render() {
@@ -39,7 +55,7 @@ class Detail extends Component {
       <Modal
         title={`${resourceType} detail`}
         content={this.renderContent()}
-        actions={this.renderActions()}
+        // actions={this.renderActions()}
         onDismiss={() => this.props.navigate(`/${resourceType}s`)}
       />
     );
@@ -48,17 +64,19 @@ class Detail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const { type, uuid } = ownProps.match.params;
-  // check if type is valid
-  console.log(type, uuid, state[type]);
-  if (!(state[type] && state[type].list)) {
-    return {
-      resourceType: null,
-      resource: null
-    };
+  const { error } = state.common;
+  // check if type and uuid is valid
+  let resource;
+  let resourceType;
+  if (state[type]) {
+    resourceType = type;
+    resource = state[type].inspected;
   }
   return {
-    resourceType: type,
-    resource: state[type].list.find((i) => i.Id === uuid)
+    resourceType,
+    resource,
+    error,
+    uuid
   };
 };
 
