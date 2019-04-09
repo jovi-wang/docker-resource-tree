@@ -61,7 +61,7 @@ export class Images extends Component {
       <div className='ui container'>
         <h1>Network List</h1>
         {this.renderTree()}
-        <button className='ui button primary' onClick={() => console.log(123)}>
+        <button className='ui button primary' onClick={() => this.props.}>
           Tag images
         </button>
         <button className='ui button negative' onClick={() => this.props.pruneImages()}>

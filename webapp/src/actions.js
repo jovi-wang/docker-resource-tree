@@ -96,3 +96,5 @@ export const pruneImages = () => async (dispatch) => {
   const { data } = await dockerAPI.post(`/images/prune`);
   dispatch({ type: IMAGE.PRUNE, payload: data.ContainersDeleted || [] });
 };
+
+export const tagMidLayerImages = () => {};
