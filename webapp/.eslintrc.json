@@ -81,7 +81,9 @@
     "eol-last": "off",
     "dot-notation": "off",
     "react/destructuring-assignment": "off",
-    "react/button-has-type": "off"
+    "react/button-has-type": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-closing-bracket-location": "warn"
   },
   "plugins": [
     "prettier"

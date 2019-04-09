@@ -10,7 +10,7 @@ services:
     tty: true
     command: sh -c /docker-entrypoint.sh
     ports:
-      - 8080:8080
+      - 8181:8181
     # user: 1000:1000
     # $(id -u):$(id -g) 
 

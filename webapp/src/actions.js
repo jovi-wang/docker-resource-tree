@@ -49,7 +49,6 @@ export const inspectNetwork = (networkId) => async (dispatch) => {
 
 export const pruneNetworks = () => async (dispatch) => {
   const { data } = await dockerAPI.post(`/networks/prune`);
-  console.log(data);
   dispatch({ type: NETWORK.PRUNE, payload: data.NetworksDeleted || [] });
 };
 // container actions

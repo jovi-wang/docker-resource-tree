@@ -8,117 +8,76 @@ export class Images extends Component {
     this.props.fetchImages();
   }
 
-  render() {
-    return (
-      <div className='ui container'>
-        <div className='ui list'>
-          <div className='item'>
-            <i className='folder icon' />
-            <div className='content'>
-              <div className='header'>src</div>
-              <div className='description'>Source files for project</div>
-              <div className='list'>
-                <div className='item'>
-                  <i className='folder icon' />
-                  <div className='content'>
-                    <div className='header'>site</div>
-                    <div className='description'>Your sites theme</div>
-                  </div>
-                </div>
-                <div className='item'>
-                  <i className='folder icon' />
-                  <div className='content'>
-                    <div className='header'>
-                      <a className='header' onClick={() => console.log(1)}>
-                        themes
-                      </a>
-                    </div>
-                    <div className='description'>Packaged theme files</div>
-                    <i className='low vision icon' />
-                    <div className='list'>
-                      <div className='item'>
-                        <i className='folder icon' />
-                        <div className='content'>
-                          <div className='header'>default</div>
-                          <div className='description'>Default packaged theme</div>
-                          <i className='deaf icon' />
-                        </div>
-                      </div>
-                      <div className='item'>
-                        <i className='folder icon' />
-                        <div className='content'>
-                          <div className='header'>my_theme</div>
-                          <div className='description'>
-                            Packaged themes are also available in this folder
-                            <div className='list'>
-                              <div className='item'>
-                                <i className='folder icon' />
-                                <div className='content'>
-                                  <div className='header'>default</div>
-                                  <div className='description'>Default packaged theme</div>
-                                  <i className='deaf icon' />
-                                </div>
-                              </div>
-                              <div className='item'>
-                                <i className='folder icon' />
-                                <div className='content'>
-                                  <div className='header'>my_theme</div>
-                                  <div className='description'>
-                                    Packaged themes are also available in this folder
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='item'>
-                  <i className='file icon' />
-                  <div className='content'>
-                    <div className='header'>theme.config</div>
-                    <div className='description'>Config file for setting packaged themes</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='item'>
-            <i className='folder icon' />
-            <div className='content'>
-              <div className='header'>
-                <i className='blind icon' />
-              </div>
+  renderChildren(parentImage) {
+    const { list } = this.props;
+    const children = list.filter((i) => i.ParentId === parentImage.Id);
 
-              <div className='description'>Compiled CSS and JS files</div>
-              <div className='list'>
-                <div className='item'>
-                  <i className='folder icon' />
-                  <div className='content'>
-                    <div className='header'>components</div>
-                    <div className='description'>Individual component CSS and JS</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    return children.map((element, index) => (
+      <div className='ui list' key={index}>
+        <div className='item'>
+          <i className='docker icon' />
+          <div className='content'>
+            {/* eslint-disable-next-line */}
+            <a
+              className='header'
+              onClick={() => this.props.navigate(`/detail/image/${element.Id}`)}
+            >
+              {element.RepoTags[0]}
+            </a>
+            {this.renderChildren(element)}
           </div>
+        </div>
+      </div>
+    ));
+  }
+
+  renderTree() {
+    const { list } = this.props;
+    console.log(list.filter((i) => i.RepoTags[0] === '<none>:<none>'));
+    const parentImageList = list.filter((i) => !i.ParentId);
+    return parentImageList.map((parentImage, index) => {
+      return (
+        <div className='ui list' key={index}>
           <div className='item'>
-            <i className='file icon' />
+            <i className='docker icon' />
             <div className='content'>
-              <div className='header'>
-                <i className='blind icon' />
-              </div>
-              <div className='description'>Contains build settings for gulp</div>
+              {/* eslint-disable-next-line */}
+              <a
+                className='header'
+                onClick={() => this.props.navigate(`/detail/image/${parentImage.Id}`)}
+              >
+                {parentImage.RepoTags[0]}
+              </a>
+              {this.renderChildren(parentImage)}
             </div>
           </div>
         </div>
+      );
+    });
+  }
+
+  render() {
+    return (
+      <div className='ui container'>
+        <h1>Network List</h1>
+        {this.renderTree()}
+        <button className='ui button primary' onClick={() => console.log(123)}>
+          Tag images
+        </button>
+        <button className='ui button negative' onClick={() => this.props.pruneImages()}>
+          Clean unused images
+        </button>
       </div>
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  const { list } = state.image;
+  return {
+    list
+  };
+};
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(Images);

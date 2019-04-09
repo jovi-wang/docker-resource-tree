@@ -23,10 +23,11 @@ export class Containers extends Component {
       });
       return (
         <tr key={Id}>
-          <td data-label='Image'>
-            <a onClick={() => this.props.navigate(`/detail/container/${Id}`)}>{Image}</a>
+          <td data-label='Image'>{Image}</td>
+          <td data-label='Names'>
+            {/* eslint-disable-next-line */}
+            <a onClick={() => this.props.navigate(`/detail/container/${Id}`)}>{Names.join(', ')}</a>
           </td>
-          <td data-label='Names'>{Names.join(', ')}</td>
           <td data-label='Created'>{moment(Created * 1000).format('DD/MM/YYYY hh:mm:ss')}</td>
           <td data-label='Status'>{Status}</td>
           <td data-label='Ports'>{ports.join(', ')}</td>

@@ -12,14 +12,12 @@ export class Volumes extends Component {
     return this.props.list.map((volume) => {
       // console.log(volume);
       const { Id, Name } = volume;
+
       return (
-        <a
-          href='#'
-          className='item'
-          key={Id}
-          onClick={() => this.props.navigate(`/detail/volume/${Id}`)}>
-          {Name}
-        </a>
+        <div className='item' key={Id}>
+          {/* eslint-disable-next-line */}
+          <a onClick={() => this.props.navigate(`/detail/volume/${Id}`)}>{Name}</a>
+        </div>
       );
     });
   }

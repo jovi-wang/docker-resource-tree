@@ -36,6 +36,7 @@ exports.tagImage = async (req, res) => {
   try {
     const { imageId } = req.params;
     const { tag, repo } = req.body;
+    console.log(tag, repo);
     await dockerAPI.post(`/images/${imageId}/tag?repo=${repo}&tag=${tag}`);
     res.json();
   } catch (err) {
