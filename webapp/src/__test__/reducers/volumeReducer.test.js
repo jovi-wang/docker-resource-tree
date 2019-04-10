@@ -1,17 +1,17 @@
 import volumeReducer from '../../reducers/volumeReducer';
-import { ABC } from '../../constant';
+import { VOLUME } from '../../constant';
 
-describe('todos reducer', () => {
+describe('volunme reducer', () => {
   it('should return the initial state', () => {
-    expect(volumeReducer(undefined, {})).toEqual([]);
+    expect(volumeReducer(undefined, {})).toEqual({ inspected: {}, list: [] });
   });
 
-  it('should handle ABC', () => {
-    expect(
-      volumeReducer([], {
-        type: ABC,
-        payload: '123'
-      })
-    ).toEqual(['123']);
-  });
+  // it('should handle ABC', () => {
+  //   expect(
+  //     volumeReducer([], {
+  //       type: ABC,
+  //       payload: '123'
+  //     })
+  //   ).toEqual(['123']);
+  // });
 });

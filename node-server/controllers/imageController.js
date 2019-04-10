@@ -66,6 +66,6 @@ exports.deleteImage = async (req, res) => {
     res.json(data);
   } catch (err) {
     console.log(err);
-    res.status(400).json(err.response.data);
+    res.status(400).send(err.response.data);
   }
 };

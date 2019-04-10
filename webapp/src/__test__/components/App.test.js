@@ -3,8 +3,8 @@ import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter, push, routerMiddleware } from 'connected-react-router';
-import { createMemoryHistory } from 'history';
-import configureMockStore from 'redux-mock-store';
+// import { createMemoryHistory } from 'history';
+// import configureMockStore from 'redux-mock-store';
 
 import Header from '../../components/Header';
 import App from '../../components/App';
@@ -13,7 +13,7 @@ import ImagesPage from '../../components/ImagesPage';
 import ContainersPage from '../../components/ContainersPage';
 import VolumesPage from '../../components/VolumesPage';
 import NetworksPage from '../../components/NetworksPage';
-
+import DetailPage from '../../components/DetailPage';
 
 describe('App components render all routes', () => {
   const shallowWrapper = shallow(<App />);
@@ -22,7 +22,7 @@ describe('App components render all routes', () => {
     expect(shallowWrapper.find(ConnectedRouter).length).toEqual(1);
     expect(shallowWrapper.find(Header).length).toEqual(1);
     expect(shallowWrapper.find(Switch).length).toEqual(1);
-    expect(shallowWrapper.find(Route).length).toEqual(6);
+    expect(shallowWrapper.find(Route).length).toEqual(7);
     const pathMap = shallowWrapper.find(Route).reduce((acc, route) => {
       const { path, component } = route.props();
       acc[path] = component;
@@ -33,6 +33,7 @@ describe('App components render all routes', () => {
     expect(pathMap['/volumes/']).toBe(VolumesPage);
     expect(pathMap['/containers/']).toBe(ContainersPage);
     expect(pathMap['/networks/']).toBe(NetworksPage);
+    expect(pathMap['/detail/:type/:uuid']).toBe(DetailPage);
   });
 });
 

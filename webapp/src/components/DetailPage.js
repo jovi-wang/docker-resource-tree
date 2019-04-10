@@ -41,10 +41,7 @@ class Detail extends Component {
     const { resource, resourceType } = this.props;
     if (resourceType === 'image') {
       return (
-        <button
-          onClick={() => this.props.deleteImage(resource.Id)}
-          className="ui button negative"
-        >
+        <button onClick={() => this.props.deleteImage(resource.Id)} className='ui button negative'>
           Delete
         </button>
       );
@@ -68,11 +65,20 @@ class Detail extends Component {
     );
   }
 
+  renderTitle() {
+    const { resource, resourceType } = this.props;
+    if (resourceType === 'image' && resource.ContainerConfig) {
+      const cmdArray = resource.ContainerConfig.Cmd;
+      return cmdArray[cmdArray.length - 1];
+    }
+    return `${resourceType} detail`;
+  }
+
   render() {
     const { resourceType } = this.props;
     return (
       <Modal
-        title={`${resourceType} detail`}
+        title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
         onDismiss={() => this.props.navigate(`/${resourceType}s`)}

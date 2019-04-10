@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 import * as actions from '../actions';
 
@@ -34,7 +35,6 @@ export class Images extends Component {
 
   renderTree() {
     const { list } = this.props;
-    console.log(list.filter((i) => i.RepoTags[0] === '<none>:<none>'));
     const parentImageList = list.filter((i) => !i.ParentId);
     return parentImageList.map((parentImage, index) => {
       return (
@@ -48,7 +48,7 @@ export class Images extends Component {
                 onClick={() => this.props.navigate(`/detail/image/${parentImage.Id}`)}
               >
                 {/* eslint-enable */}
-                {parentImage.RepoTags[0]}
+                {parentImage.RepoTags.join(', ')}
               </a>
               {this.renderChildren(parentImage)}
             </div>
@@ -61,7 +61,7 @@ export class Images extends Component {
   render() {
     return (
       <div className='ui container'>
-        <h1>Network List</h1>
+        <h1>Image List</h1>
         {this.renderTree()}
         {/* <button className='ui button primary' onClick={() => console.log(1)}>
           Tag images
@@ -76,7 +76,7 @@ export class Images extends Component {
 const mapStateToProps = (state, ownProps) => {
   const { list } = state.image;
   return {
-    list
+    list: _.sortBy(list, ['Created'])
   };
 };
 export default connect(

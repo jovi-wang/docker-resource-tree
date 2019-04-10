@@ -6,7 +6,7 @@ exports.listContainers = async (req, res) => {
     res.json(data);
   } catch (err) {
     console.log(err);
-    res.status(400).send(err.response.data);
+    res.status(400).json(err.response.data);
   }
 };
 exports.inspectContainer = async (req, res) => {
@@ -16,7 +16,7 @@ exports.inspectContainer = async (req, res) => {
     res.json(data);
   } catch (err) {
     console.log(err);
-    res.status(400).send(err.response.data);
+    res.status(400).json(err.response.data);
   }
 };
 exports.pruneContainers = async (req, res) => {
@@ -25,6 +25,6 @@ exports.pruneContainers = async (req, res) => {
     res.json(data);
   } catch (err) {
     console.log(err);
-    res.status(400).send(err.response.data);
+    res.status(400).json(err.response.data);
   }
 };
