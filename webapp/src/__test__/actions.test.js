@@ -1,10 +1,10 @@
-import * as actions from '../../actions/volumeActions';
-import { ABC, FETCH } from '../../constant';
+import * as actions from '../actions';
+import { COMMON, VOLUME, NETWORK, CONTAINER, IMAGE } from '../constant';
 import { createBrowserHistory } from 'history';
 import configureMockStore from 'redux-mock-store';
 import reduxThunk from 'redux-thunk';
 import { routerMiddleware } from 'connected-react-router';
-import dockerAPI from '../../dockerAPI';
+import dockerAPI from '../dockerAPI';
 
 jest.mock('../../dockerAPI');
 afterAll(() => {

@@ -20,9 +20,8 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH:
       return { ...state, list: action.payload };
     case TAG:
-      console.log(action.payload);
-      return { ...state };
     default:
+      console.log(action);
       return state;
   }
 };

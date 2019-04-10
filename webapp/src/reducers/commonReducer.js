@@ -7,9 +7,9 @@ export default (state = INITIAL_STATE, action) => {
   const { ERROR, CLEAR_ERROR } = COMMON;
   switch (action.type) {
     case ERROR:
-      return { ...state, error: action.payload };
+      return { error: action.payload };
     case CLEAR_ERROR:
-      return { ...state, error: '' };
+      return { error: '' };
     default:
       return state;
   }

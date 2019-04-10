@@ -103,7 +103,7 @@ export const deleteImage = (imageId) => async (dispatch) => {
     dispatch({ type: IMAGE.DELETE, payload: data });
     dispatch(navigate('/images'));
   } catch (err) {
-    console.log(err)
+    console.log(err);
     dispatch({ type: COMMON.ERROR, payload: err.message });
   }
 };
