@@ -8,10 +8,13 @@ import * as serviceWorker from './serviceWorker';
 
 const store = configureStore();
 
+export const Root = ({ children }) => {
+  return <Provider store={store}>{children}</Provider>;
+};
 ReactDOM.render(
-  <Provider store={store}>
+  <Root>
     <App history={history} />
-  </Provider>,
+  </Root>,
   document.getElementById('root')
 );
 
